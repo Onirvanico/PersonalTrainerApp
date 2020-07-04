@@ -1,21 +1,23 @@
-package br.com.projeto.personal;
+package br.com.projeto.personal.ui.activities;
+
+import android.content.Intent;
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import br.com.projeto.personal.R;
 import br.com.projeto.personal.model.Professor;
 import br.com.projeto.personal.recyclerview.ListaDosPersonal;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
         ListaDosPersonal adapter = new ListaDosPersonal(this, professores);
         recyclerView.setAdapter(adapter);
-        adapter.setOnTouchItemList((position) -> Log.i("clique",
-                "view tocada" + " na posição " + position));
+        adapter.setOnTouchItemList((position) -> {
+            startActivity(new Intent(MainActivity.this,
+                    InformacoesDoPersonal.class));
+
+        });
     }
 }

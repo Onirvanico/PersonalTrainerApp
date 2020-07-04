@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Personal Trainer</string>
+    <string name="nome">Nome:</string>
+    <string name="experiencia">Experiência:</string>
 </resources>
