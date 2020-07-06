@@ -2,6 +2,7 @@ package br.com.projeto.personal.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.TextView;
 import br.com.projeto.personal.R;
 import br.com.projeto.personal.model.Professor;
 
-public class InformacoesDoPersonal extends AppCompatActivity {
+public class InformacoesDoPersonal extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,18 @@ public class InformacoesDoPersonal extends AppCompatActivity {
             Professor professor = getIntent().getParcelableExtra("professor");
             nome.setText(professor.getNome());
             experiencia.setText(professor.getExperiencia());
+        }
+
+        TextView btAgendar = findViewById(R.id.informacoes_personal_botao_agendar);
+
+        btAgendar.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.informacoes_personal_botao_agendar) {
+            startActivity(new Intent(InformacoesDoPersonal.this,
+                    AgendamentoActivity.class));
         }
     }
 }

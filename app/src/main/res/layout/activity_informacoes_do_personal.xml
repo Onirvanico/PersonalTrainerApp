@@ -64,4 +64,18 @@
         app:layout_constraintBottom_toBottomOf="@+id/informacoes_personal_experiencia"
         app:layout_constraintStart_toEndOf="@id/informacoes_personal_experiencia" />
 
+    <Button
+        android:id="@+id/informacoes_personal_botao_agendar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Agendar atendimento"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_orange_dark"
+        android:padding="10dp"
+        android:layout_margin="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/informacoes_personal_input_experiencia"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
