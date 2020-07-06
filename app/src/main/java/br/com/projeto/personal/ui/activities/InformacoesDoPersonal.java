@@ -21,15 +21,23 @@ public class InformacoesDoPersonal extends AppCompatActivity implements View.OnC
         TextView nome = findViewById(R.id.informacoes_personal_input_nome);
         TextView experiencia = findViewById(R.id.informacoes_personal_input_experiencia);
 
-        if(getIntent().hasExtra("professor")) {
-            Professor professor = getIntent().getParcelableExtra("professor");
-            nome.setText(professor.getNome());
-            experiencia.setText(professor.getExperiencia());
-        }
+        buscaPersonalTrainer(nome, experiencia);
 
         TextView btAgendar = findViewById(R.id.informacoes_personal_botao_agendar);
 
         btAgendar.setOnClickListener(this);
+    }
+
+    private void buscaPersonalTrainer(TextView nome, TextView experiencia) {
+        if(getIntent().hasExtra("professor")) {
+            preencheCamposPersonal(nome, experiencia);
+        }
+    }
+
+    private void preencheCamposPersonal(TextView nome, TextView experiencia) {
+        Professor professor = getIntent().getParcelableExtra("professor");
+        nome.setText(professor.getNome());
+        experiencia.setText(professor.getExperiencia());
     }
 
     @Override

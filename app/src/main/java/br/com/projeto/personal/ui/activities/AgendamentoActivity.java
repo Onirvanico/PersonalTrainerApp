@@ -41,38 +41,46 @@ public class AgendamentoActivity extends AppCompatActivity implements AdapterVie
             String hora = itemSelecionado.toString();
             String tipoAtividade = "";
 
-            switch(radioGroup.getCheckedRadioButtonId()) {
-                case R.id.radio_funcionais:
-                    tipoAtividade = "Atividades funcionais";
-                    break;
+            tipoAtividade = buscaAtividadeEscolhida(radioGroup, tipoAtividade);
 
-                case R.id.radio_aerobicos:
-                    tipoAtividade = "Atividades aeróbicas";
-                    break;
-
-                case R.id.radio_anaerobicos:
-                    tipoAtividade = "Atividades anaeróbicas";
-            }
-
-           /* new AlertDialog.Builder(this)
-                    .setIcon(android.R.drawable.alert_light_frame)
-                    .setTitle("Detalhes do agendamento")
-                    .setMessage("Verifique se todas as informações são as desejadas")
-                    .setPositiveButton("Ok", (dialog, which) -> {
-                    });*/
-            Log.i("TipoAtividade ", tipoAtividade);
-            Dialog dialog = new Dialog(this);
-            dialog.setContentView(R.layout.opcoes_marcadas);
-            dialog.setTitle("Verifique se tudo está de acordo com o esperado!");
-            ListView lista = dialog.findViewById(R.id.lista_opcoes_marcas);
             String informacoes [] = {"Data: " + dataEscolhida,"Hora: " + hora,
                     "Tipo de atividade: " + tipoAtividade};
-            
-            lista.setAdapter(new ArrayAdapter<String>(this,
-                    android.R.layout.simple_list_item_1,
-                    informacoes));
-            dialog.show();
+
+            configuraDialogoDeInformacoes(informacoes);
         });
+    }
+
+    private String buscaAtividadeEscolhida(RadioGroup radioGroup, String tipoAtividade) {
+        switch(radioGroup.getCheckedRadioButtonId()) {
+            case R.id.radio_funcionais:
+                tipoAtividade = "Atividades funcionais";
+                break;
+
+            case R.id.radio_aerobicos:
+                tipoAtividade = "Atividades aeróbicas";
+                break;
+
+            case R.id.radio_anaerobicos:
+                tipoAtividade = "Atividades anaeróbicas";
+        }
+        return tipoAtividade;
+    }
+
+    private void configuraDialogoDeInformacoes(String[] informacoes) {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.opcoes_marcadas);
+        dialog.setTitle("Verifique se tudo está de acordo com o esperado!");
+        ListView lista = dialog.findViewById(R.id.lista_opcoes_marcas);
+
+
+        configuraListaDeInformacoesAdapter(informacoes, lista);
+        dialog.show();
+    }
+
+    private void configuraListaDeInformacoesAdapter(String[] informacoes, ListView lista) {
+        lista.setAdapter(new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1,
+                informacoes));
     }
 
     private void configuraSpinner(Spinner spinner) {
