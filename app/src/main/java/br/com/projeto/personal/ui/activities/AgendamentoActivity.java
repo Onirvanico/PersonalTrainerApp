@@ -19,6 +19,7 @@ import br.com.projeto.personal.R;
 
 public class AgendamentoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    public static final String APP_BAR_AGENDAR = "Agendar Atividade";
     private Object itemSelecionado;
 
     @Override
@@ -26,6 +27,7 @@ public class AgendamentoActivity extends AppCompatActivity implements AdapterVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agendamento);
 
+        setTitle(APP_BAR_AGENDAR);
         Button botaoConcluir = findViewById(R.id.agendamento_botao_concluir);
         Spinner spinner = findViewById(R.id.agendamento_spinner_hora);
         EditText campoData = findViewById(R.id.agendamento_input_data);

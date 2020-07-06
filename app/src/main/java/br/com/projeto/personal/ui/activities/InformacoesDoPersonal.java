@@ -13,11 +13,14 @@ import br.com.projeto.personal.model.Professor;
 
 public class InformacoesDoPersonal extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String APP_BAR_INFORMACOES_PERSONAL = "Informações do Personal Trainer";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacoes_do_personal);
 
+        setTitle(APP_BAR_INFORMACOES_PERSONAL);
         TextView nome = findViewById(R.id.informacoes_personal_input_nome);
         TextView experiencia = findViewById(R.id.informacoes_personal_input_experiencia);
 
