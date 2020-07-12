@@ -15,6 +15,10 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.internal.Storage;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import br.com.projeto.personal.R;
 
 public class AgendamentoActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -37,14 +41,18 @@ public class AgendamentoActivity extends AppCompatActivity implements AdapterVie
         configuraSpinner(spinner);
         spinner.setOnItemSelectedListener(this);
 
-
         botaoConcluir.setOnClickListener(view -> {
             String dataEscolhida = campoData.getText().toString();
             String hora = itemSelecionado.toString();
             String tipoAtividade = "";
-
+            String[] dataDividida = dataEscolhida.split("\\d{3}");
+            StringBuilder stringBuilder = new StringBuilder();
+            for( String dateParcel : dataDividida) {
+                stringBuilder.append(dateParcel);
+                stringBuilder.append("/");
+            }
+            Log.i("Data divida ", stringBuilder.toString());
             tipoAtividade = buscaAtividadeEscolhida(radioGroup, tipoAtividade);
-
             String informacoes [] = {"Data: " + dataEscolhida,"Hora: " + hora,
                     "Tipo de atividade: " + tipoAtividade};
 

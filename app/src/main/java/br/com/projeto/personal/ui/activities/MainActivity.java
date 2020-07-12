@@ -2,11 +2,18 @@ package br.com.projeto.personal.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,13 +29,34 @@ public class MainActivity extends AppCompatActivity {
     private List<Professor> professores;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerview_personal);
-
         professores = exemploDeLista();
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        StorageReference pathDadosUsuario = storageRef.child("DadosUsuario");
+        StorageReference dadosUsuarioArquivo = storageRef.child("DadosUsuario/arquivo.txt");
+
+
+      /*  try {
+
+            InputStream fs = new FileInputStream(getFilesDir()+"/arquivo.txt");
+            dadosUsuarioArquivo.putStream(fs).addOnFailureListener( exception -> {
+                Toast.makeText(this, "Erro ao fazer upload", Toast.LENGTH_LONG).show();
+            }).addOnSuccessListener(taskSnapshot -> {
+                Toast.makeText(this, "Sucesso do uplado do arquivo", Toast.LENGTH_SHORT).show();
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+
+
+        Log.i("Caminho da pasta", pathDadosUsuario.getRoot().toString() );
+        Log.i("storage ", pathDadosUsuario.getPath());
 
         ListaDosPersonal adapter = configuraAdapter(professores);
         botaoAbrirDetalhesDoPersonal(adapter);
@@ -56,9 +84,16 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Professor> exemploDeLista() {
         return new ArrayList<>(Arrays.asList(
-                    new Professor("Cristiano", "70"),
-                    new Professor("Welinton", "50"),
-                    new Professor("Cactóide", "interminável")
+                    new Professor("Personal 1", "70"),
+                    new Professor("Personal 2", "50"),
+                    new Professor("Personal 3", "40"),
+                    new Professor("Personal 4", "65"),
+                    new Professor("Personal 5", "70"),
+                    new Professor("Personal 6", "80"),
+                    new Professor("Personal 7", "45"),
+                    new Professor("Personal 8", "25"),
+                    new Professor("Personal 9", "35"),
+                    new Professor("Personal 10", "80")
             ));
     }
 }
