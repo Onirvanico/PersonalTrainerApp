@@ -12,7 +12,6 @@ public class Professor implements Parcelable {
 
     private String nome;
     private String experiencia;
-    private List<String> habilidades = new ArrayList<>();
     private int reputação;
 
     public Professor(String nome, String experiencia) {
@@ -23,7 +22,6 @@ public class Professor implements Parcelable {
     protected Professor(Parcel in) {
         nome = in.readString();
         experiencia = in.readString();
-        habilidades = in.createStringArrayList();
         reputação = in.readInt();
     }
 
@@ -47,9 +45,6 @@ public class Professor implements Parcelable {
         return experiencia;
     }
 
-    public List<String> getHabilidades() {
-        return habilidades;
-    }
 
     public int getReputação() {
         return reputação;
@@ -70,7 +65,6 @@ public class Professor implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nome);
         dest.writeString(experiencia);
-        dest.writeStringList(habilidades);
         dest.writeInt(reputação);
     }
 }

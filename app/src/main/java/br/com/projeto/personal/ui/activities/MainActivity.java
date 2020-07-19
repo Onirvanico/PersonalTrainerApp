@@ -21,12 +21,17 @@ import java.util.List;
 import br.com.projeto.personal.R;
 import br.com.projeto.personal.model.Professor;
 import br.com.projeto.personal.recyclerview.ListaDosPersonal;
+import br.com.projeto.personal.retrofit.TrainerRetrofit;
+import br.com.projeto.personal.retrofit.service.TrainerService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String PROFESSOR = "professor";
     private RecyclerView recyclerView;
-    private List<Professor> professores;
+    private List<Professor> professores = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -34,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerview_personal);
-        professores = exemploDeLista();
+       // professores = exemploDeLista();
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
@@ -53,6 +58,24 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }*/
+
+        TrainerService trainerService = new TrainerRetrofit().getTrainerService();
+        Call<List<Professor>> listaProfessores = trainerService.buscaProfessores();
+
+        listaProfessores.enqueue(new Callback<List<Professor>>() {
+            @Override
+            public void onResponse(Call<List<Professor>> call, Response<List<Professor>> response) {
+                professores = response.body();
+                ListaDosPersonal adapter = configuraAdapter(professores);
+                botaoAbrirDetalhesDoPersonal(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<Professor>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Falha ao carregar a lista de "+
+                        "professores", Toast.LENGTH_LONG).show();
+            }
+        });
 
 
         Log.i("Caminho da pasta", pathDadosUsuario.getRoot().toString() );
