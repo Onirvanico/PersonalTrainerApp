@@ -83,11 +83,11 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<Professor>() {
             @Override
             public void onResponse(Call<Professor> call, Response<Professor> response) {
-                Professor prof = response.body();
-                Toast.makeText(MainActivity.this,
-                        "Tudo certo" + prof, LENGTH_LONG).show();
-                Log.i("Professor", prof.toString());
+                
                 if (response.isSuccessful()) {
+                    Professor prof = response.body();
+                    Toast.makeText(MainActivity.this,
+                            "Tudo certo" + prof, LENGTH_LONG).show();
                 }
             }
 
