@@ -1,4 +1,4 @@
-package br.com.projeto.personal.recyclerview;
+package br.com.projeto.personal.ui.activities.recyclerview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 import br.com.projeto.personal.R;
 import br.com.projeto.personal.model.Professor;

@@ -5,11 +5,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Professor implements Parcelable {
 
+    private String _id;
     private String nome;
     private String experiencia;
     private int reputação;
@@ -20,6 +18,7 @@ public class Professor implements Parcelable {
     }
 
     protected Professor(Parcel in) {
+        _id = in.readString();
         nome = in.readString();
         experiencia = in.readString();
         reputação = in.readInt();
@@ -37,6 +36,14 @@ public class Professor implements Parcelable {
         }
     };
 
+    public void setReputação(int reputação) {
+        this.reputação = reputação;
+    }
+
+    public String getId() {
+        return _id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -53,7 +60,7 @@ public class Professor implements Parcelable {
     @NonNull
     @Override
     public String toString() {
-        return this.nome;
+        return this.nome + "/id: " + this._id;
     }
 
     @Override
@@ -63,6 +70,7 @@ public class Professor implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(_id);
         dest.writeString(nome);
         dest.writeString(experiencia);
         dest.writeInt(reputação);

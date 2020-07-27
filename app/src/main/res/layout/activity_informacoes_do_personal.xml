@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:text="Agendar atendimento"
         android:textColor="@android:color/white"
-        android:background="@android:color/holo_orange_dark"
+        android:background="#77DD77"
         android:padding="10dp"
         android:layout_margin="30dp"
         app:layout_constraintBottom_toBottomOf="parent"

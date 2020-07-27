@@ -51,7 +51,7 @@ public class AgendamentoActivity extends AppCompatActivity implements AdapterVie
                 stringBuilder.append(dateParcel);
                 stringBuilder.append("/");
             }
-            Log.i("Data divida ", stringBuilder.toString());
+
             tipoAtividade = buscaAtividadeEscolhida(radioGroup, tipoAtividade);
             String informacoes [] = {"Data: " + dataEscolhida,"Hora: " + hora,
                     "Tipo de atividade: " + tipoAtividade};
